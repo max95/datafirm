@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>DATAGOUV</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="css/plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+</head>
+
+<body id="page-top">
+
+<?php include"menu.php" ?>
+
+<div class="header-content">
+<div class="col-md-8">
+  <!-- Emplacement de ma Map -->
+  <div id="map_canvas"></div>
+
+  <!-- Je mets du style pour donner une forme à mon emplacement de map -->
+  		<style>
+  		#map_canvas{width:100%;height:350px;}
+  		</style>
+
+  <!-- Script donné par Google à linker avec sa page -->
+  		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxFJrx6TuNt8DZk0gQLmZ8CsXsvnpHzyA"></script>
+
+
+  <!-- Script pour dessinner sa map -->
+  		<script>
+      function famille(){
+          var req = new XMLHttpRequest();
+          var a = document.getElementById('secteur').value;
+          console.log(a);
+          req.open("GET","recherche_famille.php?famille="+a,false);
+          req.send(null);
+          document.getElementById('famille').innerHTML=req.responseText;
+          document.getElementById('sousfamille').innerHTML="";
+          document.getElementById('codeape').innerHTML="";
+      }
+      function sousfamille(){
+          var req = new XMLHttpRequest();
+          var a = document.getElementById('resultatfamille').value;
+          console.log(a);
+          //alert(a);
+          req.open("GET","recherche_ssfamille.php?sousfamille="+a,false);
+          req.send(null);
+          document.getElementById('sousfamille').innerHTML=req.responseText;
+      }
+      function codeape(){
+          var req = new XMLHttpRequest();
+          var a = document.getElementById('resultatssfamille').value;
+          console.log(a);
+          //alert(a);
+          req.open("GET","recherche_codeape.php?codeape="+a,false);
+          req.send(null);
+          document.getElementById('codeape').innerHTML=req.responseText;
+      }
+  		function initialize(){
+
+        <?php
+        $ini_array = parse_ini_file("config.ini");
+        $host=($ini_array['host']);
+        $login=($ini_array['login']);
+        $mdp=($ini_array['mdp']);
+        $db=($ini_array['db']);
+        ?>
+
+  			var map_canvas = document.getElementById('map_canvas');
+
+  			var map_options = {
+  				center: new google.maps.LatLng(48.858205, 2.294359),
+  				zoom: 10,
+  				mapTypeId: google.maps.MapTypeId.ROADMAP
+  				}
+
+  			var map = new google.maps.Map(map_canvas, map_options)
+
+  			//--> Configuration de l'icône personnalisée
+  		var image = {
+  			// Adresse de l'icône personnalisée - Attention il faut que le .png existe
+  			url: 'drapeau.png',
+  			// Taille de l'icône personnalisée
+  			size: new google.maps.Size(40, 40),
+  			// Origine de l'image, souvent (0, 0)
+  			origin: new google.maps.Point(0,0),
+  			// L'ancre de l'image. Correspond au point de l'image que l'on raccroche à la carte. Par exemple, si votre îcone est un drapeau, cela correspond à son mâts
+  			anchor: new google.maps.Point(20, 40)
+  		};
+
+
+      //Pointeur d'Origine
+      var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(48.858205, 2.294359),
+      map: map,
+      draggable:true,
+      title:"DEPART",
+      // On définit l'icône de ce marker comme étant l'image définie juste au-dessus
+      //icon: image
+      });
+
+      <?php
+      if(ISSET($_GET['ape'])){
+        $ape = $_GET['ape'];
+        $proximite = $_GET['rating'];
+  		$db = mysqli_connect($host, $login, $mdp,$db) or die('Erreur de connexion : ' . mysqli_connect_error());
+
+  		// on crée la requête SQL
+  		$sql = "SELECT entreprise,lat,lon,numero,adresse,cp,ville, get_distance_metres('48.858205', '2.294359', lat, lon)
+  		      AS proximite
+  		      FROM Entreprise where ape like '".$ape."'
+  		      HAVING proximite < ".$proximite." ORDER BY proximite ASC";
+
+  		// on envoie la requête
+  		$req = mysqli_query($db, $sql) or die('Erreur de connexion : ' . mysqli_connect_error());
+
+  		// on fait une boucle qui va faire un tour pour chaque enregistrement
+  		while($data = mysqli_fetch_assoc($req))
+  		    {
+  		    // on affiche les informations de l'enregistrement en cours
+  		    //echo $data['nom_commune'].' '.$data['lat'].' '.$data['lon'].'</i><br>';
+
+  ?>
+
+  				var marker = new google.maps.Marker({
+  				position: new google.maps.LatLng(<?php echo $data['lat'];?>,<?php echo $data['lon'];?>),
+  				map: map,
+  				title:"<?php echo $data['entreprise'];?>",
+  				// On définit l'icône de ce marker comme étant l'image définie juste au-dessus
+  				icon: image
+  				});
+
+  <?php
+}}
+  		?>
+
+  			}
+
+  			// Astuce pour ne pas afficher la map lorsqu'il s'agit du référenceur de Google
+  			if (navigator.userAgent.toLowerCase().indexOf('googlebot') === -1) {
+  			// Lancement du script au chargement de la page
+  			google.maps.event.addDomListener(window, 'load', initialize);
+  			}
+
+  		</script>
+
+      <hr class="featurette-divider">
+
+<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+<thead>
+ <tr>
+<th>Distance</th>
+<th>Nom</th>
+<th>Adresse</th>
+<th>CP</th>
+<th>Ville</th>
+</tr>
+</thead>
+<?php
+mysqli_data_seek ($req, 0);
+while($data = mysqli_fetch_assoc($req))
+    {
+ ?>
+ <tr>
+<th><?php echo $data['proximite'];?></th>
+<th><?php echo $data['entreprise'];?></th>
+<th><?php echo $data['numero'].' '.$data['adresse'];?></th>
+<th><?php echo $data['cp'];?></th>
+<th><?php echo $data['ville'];?></th>
+</tr>
+<?php } ?>
+
+
+<tbody>
+
+
+</tbody>
+
+</table>
+
+</div>
+ <div class="col-lg-4">
+ <div class="well">
+
+
+<form action="#" method="GET"><h4 style="color: black">Distance</h4>
+<input type="range" min="1" max="50" step="10" value="10" name="rating" id="rating" />
+
+ <h4 style="color: black">Code APE</h4>
+
+        <div class="input-group">
+        <input name="ape" type="text" value="<?php echo $ape;?>"class="form-control"/>
+        </div><br/>
+<button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
+<a class="btn btn-primary" style="background-color: Grey " href="liste_ape.php">Liste Code APE</a><br/>
+</form>
+<form action="#" method="post">
+<tr>
+  <td >
+    <h4 style="color: black">Secteur</h4>
+    <form action="" method="GET">
+    <select id="secteur" onchange="famille()" class="form-control" style="color: black">
+      <?php include"recherche_secteur.php" ?>
+    </select>
+  </td>
+</tr>
+<tr>
+  <td>
+    <div id="famille"></div>
+  </td>
+</tr>
+<tr>
+  <td>
+    <div id="sousfamille"></div>
+  </td>
+</tr>
+<tr>
+  <td>
+    <div id="codeape"></div>
+  </td>
+</tr>
+
+<button type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
+</form>
+        </div>
+        </div>
+</div>
+
+<!-- Footer -->
+<?php include"footer.php" ?>
+
+<!-- jQuery Version 1.11.0 -->
+<script src="js/jquery-1.11.0.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="js/sb-admin-2.js"></script>
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+$(document).ready(function() {
+    $('#dataTables-example').dataTable();
+});
+</script>
+
+    <!-- statistiques -->
+    <?php include"record_stat.php" ?>
+
+</body>
+
+</html>

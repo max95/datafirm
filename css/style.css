@@ -1,0 +1,49 @@
+#Map{
+    background-color : brown;
+    height : 60%;
+    float : left;
+    margin-left : 0%;
+    width : 75%;
+}
+#Filters{
+    background-color : darkred;
+    text-align : left;
+    height : 60%;
+    width : 25%;
+    float : right;
+}
+
+#Banner{
+    width : 100%;
+    height : 120px;
+    background-color : orangered;
+}
+
+
+
+h1{
+    text-align : center;
+}
+
+h2{
+    text-align : center;
+}
+
+h3{
+    margin-left : 5%;
+}
+input {
+    margin-left : 5%;
+    z-index : 999;
+}
+
+#pac-input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+#pac-input[type=text]:focus {
+    width: 100%;
+}
