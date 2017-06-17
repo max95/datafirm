@@ -5,7 +5,7 @@ $(function() {
           element: 'morris-line-chart',
           data: [
           <?php
-          $ini_array = parse_ini_file("config.ini");
+          $ini_array = parse_ini_file("../../../config.ini");
           $host=($ini_array['host']);
           $login=($ini_array['login']);
           $mdp=($ini_array['mdp']);
