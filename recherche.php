@@ -49,8 +49,8 @@
       function loadScript() {
         var script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = 'https://maps.googleapis.com/maps/api/js?v=3' +
-            '&key=' + GOOGLE_MAP_KEY +'&callback=initialize'; //& needed
+        script.src = 'https://maps.googleapis.com/maps/api/js' +
+            '?key=' + GOOGLE_MAP_KEY +'&callback=initialize'; //& needed
         document.body.appendChild(script);
       }
       window.onload = loadScript;
