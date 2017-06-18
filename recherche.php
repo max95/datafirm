@@ -41,9 +41,20 @@
   		</style>
 
   <!-- Script donné par Google à linker avec sa page -->
-  		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxFJrx6TuNt8DZk0gQLmZ8CsXsvnpHzyA"></script>
+      <script>
+      <?php
+      $ini_array = parse_ini_file("config.ini"); ?>
+      var GOOGLE_MAP_KEY = " <?php echo ($ini_array['google']); ?>";
 
-
+      function loadScript() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://maps.googleapis.com/maps/api/js?v=3' +
+            '&key=' + GOOGLE_MAP_KEY +'&callback=initialize'; //& needed
+        document.body.appendChild(script);
+      }
+      window.onload = loadScript;
+      </script>
   <!-- Script pour dessinner sa map -->
   		<script>
       function famille(){
