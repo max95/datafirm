@@ -69,9 +69,9 @@
                         <img class="panel-profile-img" src="images/jerome.png">
                         <h5 class="panel-title">Jerome Bouchet</h5>
                         <p class="m-b">Apprenti Data Analyst.</p>
-                        <a href="https://www.linkedin.com/in/jerome-bouchet-375b28a2/" role="button"><img src="images\linkedin.png" class="img-rounded" title="lien vers linkedin"></a> 
-                        <a href="https://fr.viadeo.com/fr/" role="button"><img src="images\viadeo.png" class="img-rounded" title="lien vers viadeo"></a> 
-                        <a href="https://fr-fr.facebook.com/" role="button"><img src="images\fb.jpg" class="img-rounded" title="lien vers facebook"></a>
+                        <a href="https://www.linkedin.com/in/jerome-bouchet-375b28a2/" role="button " onclick="window.open(this.href); return false;"><img src="images\linkedin.png" class="img-rounded" title="lien vers linkedin"></a> 
+                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.png" class="img-rounded" title="lien vers viadeo"></a> 
+                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpg" class="img-rounded" title="lien vers facebook"></a>
                       </div>
                     </div>
           </div>
@@ -83,9 +83,9 @@
                         <img class="panel-profile-img" src="images/hugo.jpg">
                         <h5 class="panel-title">Hugo Fichot</h5>
                         <p class="m-b">Apprenti Décisionnel.</p>
-                        <a href="https://www.linkedin.com/" role="button"><img src="images\linkedin.png" class="img-rounded" title="lien vers linkedin"></a> 
-                        <a href="https://fr.viadeo.com/fr/" role="button"><img src="images\viadeo.png" class="img-rounded" title="lien vers viadeo"></a> 
-                        <a href="https://fr-fr.facebook.com/" role="button"><img src="images\fb.jpg" class="img-rounded" title="lien vers facebook"></a>
+                        <a href="https://www.linkedin.com/in/hugo-fichot-964322105/" role="button" onclick="window.open(this.href); return false;"><img src="images\linkedin.png" class="img-rounded" title="lien vers linkedin"></a> 
+                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.png" class="img-rounded" title="lien vers viadeo"></a> 
+                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpg" class="img-rounded" title="lien vers facebook"></a>
                         </a>
                       </div>
                     </div>
@@ -98,9 +98,9 @@
                         <img class="panel-profile-img" src="images/chris.jpg">
                         <h5 class="panel-title">Christopher Clemoux</h5>
                         <p class="m-b">Apprenti Développeur.</p>
-                        <a href="https://www.linkedin.com/" role="button"><img src="images\linkedin.png" class="img-rounded" title="lien vers linkedin"></a> 
-                        <a href="https://fr.viadeo.com/fr/" role="button"><img src="images\viadeo.png" class="img-rounded" title="lien vers viadeo"></a> 
-                        <a href="https://fr-fr.facebook.com/" role="button"><img src="images\fb.jpg" class="img-rounded" title="lien vers facebook"></a>
+                        <a href="https://www.linkedin.com/in/christopher-clemoux-830814145/" role="button" onclick="window.open(this.href); return false;"><img src="images\linkedin.png" class="img-rounded" title="lien vers linkedin"></a> 
+                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.png" class="img-rounded" title="lien vers viadeo"></a> 
+                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpg" class="img-rounded" title="lien vers facebook"></a>
                       </div>
                     </div>
           </div>
