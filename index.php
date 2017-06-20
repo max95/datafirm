@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="description" content="DATAFIRM permet a ces utilisateurs de trouver une entreprise suivant son secteur d'activité. Il Géolicalise les visiteurs afin de leur permettre de voir les entreprises le plus proche d'eux.">
+    <meta name="keyboard" content="">
 
     <title>DATAFIRM</title>
 
@@ -21,6 +23,24 @@
     <link href="magnific-popup/magnific-popup.css" rel="stylesheet">
     <link href="css/creative.min.css" rel="stylesheet">
     <link href="css/perso.css" rel="stylesheet">
+    <style>
+      img{
+         width:auto;
+          height: auto;
+   
+      }
+
+      .img-rounded{
+        width: 10%;
+        height: 10%;
+      }
+      .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+            max-width: 100%;
+            height: auto;
+            display: inline;
+      }
+
+    </style>
 
 </head>
 
@@ -49,9 +69,9 @@
                         <img class="panel-profile-img" src="images/jerome.png">
                         <h5 class="panel-title">Jerome Bouchet</h5>
                         <p class="m-b">Apprenti Data Analyst.</p>
-                        <a href="https://www.linkedin.com/in/jerome-bouchet-375b28a2/" target="_blank" class="btn btn-primary-outline btn-sm m-b">
-                          <span class="icon icon-add-user"></span> Voir Linkedin
-                        </a>
+                        <a href="https://www.linkedin.com/in/jerome-bouchet-375b28a2/" role="button " onclick="window.open(this.href); return false;"><img src="images\linkedin.png" class="img-rounded" title="lien vers linkedin"></a> 
+                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.png" class="img-rounded" title="lien vers viadeo"></a> 
+                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpg" class="img-rounded" title="lien vers facebook"></a>
                       </div>
                     </div>
           </div>
@@ -63,8 +83,9 @@
                         <img class="panel-profile-img" src="images/hugo.jpg">
                         <h5 class="panel-title">Hugo Fichot</h5>
                         <p class="m-b">Apprenti Décisionnel.</p>
-                        <a href="https://www.linkedin.com" target="_blank" class="btn btn-primary-outline btn-sm m-b">
-                          <span class="icon icon-add-user"></span> Voir Linkedin
+                        <a href="https://www.linkedin.com/in/hugo-fichot-964322105/" role="button" onclick="window.open(this.href); return false;"><img src="images\linkedin.png" class="img-rounded" title="lien vers linkedin"></a> 
+                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.png" class="img-rounded" title="lien vers viadeo"></a> 
+                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpg" class="img-rounded" title="lien vers facebook"></a>
                         </a>
                       </div>
                     </div>
@@ -77,9 +98,9 @@
                         <img class="panel-profile-img" src="images/chris.jpg">
                         <h5 class="panel-title">Christopher Clemoux</h5>
                         <p class="m-b">Apprenti Développeur.</p>
-                        <a href="https://www.linkedin.com" target="_blank" class="btn btn-primary-outline btn-sm m-b">
-                          <span class="icon icon-add-user"></span> Voir Linkedin
-                        </a>
+                        <a href="https://www.linkedin.com/in/christopher-clemoux-830814145/" role="button" onclick="window.open(this.href); return false;"><img src="images\linkedin.png" class="img-rounded" title="lien vers linkedin"></a> 
+                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.png" class="img-rounded" title="lien vers viadeo"></a> 
+                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpg" class="img-rounded" title="lien vers facebook"></a>
                       </div>
                     </div>
           </div>
@@ -107,10 +128,6 @@
 
     <!-- Theme JavaScript -->
     <script src="js/creative.min.js"></script>
-
-    <form action="#" method="GET">
-      <!-- statistiques -->
-      <?php include"record_stat.php"?>
 
 </body>
 
