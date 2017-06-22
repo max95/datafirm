@@ -6,10 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="DATAFIRM permet a ces utilisateurs de trouver une entreprise suivant son secteur d'activité. Il Géolicalise les visiteurs afin de leur permettre de voir les entreprises le plus proche d'eux.">
+    <meta name="keyboard" content="">
     <meta name="author" content="">
 
-    <title>DATAGOUV</title>
+    <title>DATAFIRM-recherche d'une entreprise</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -199,30 +200,25 @@ while($data = mysqli_fetch_assoc($req))
 </tr>
 <?php } ?>
 
-
 <tbody>
-
-
 </tbody>
-
 </table>
-
 </div>
- <div class="col-lg-4">
+
+ <div class="col-md-4">
  <div class="well">
-
-
-<form action="#" method="GET"><h4 style="color: black">Distance</h4>
-<input type="range" min="1" max="50" step="10" value="10" name="rating" id="rating" />
+<form  oninput="level.value = rating.valueAsNumber" action="#" method="GET"><h4 style="color: black">Distance (km)</h4>
+<input name="rating" type="range" min="10" max="50" step="10" value="10"  id="rating" />
+<output for="flying" name="level" > <?php echo $_POST['rating'] ?>10</output>
 
  <h4 style="color: black">Code APE</h4>
-
         <div class="input-group">
         <input name="ape" type="text" value="<?php echo $ape;?>"class="form-control"/>
         </div><br/>
 <button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
 <a class="btn btn-primary" style="background-color: Grey " href="liste_ape.php">Liste Code APE</a><br/>
 </form>
+
 <form action="#" method="post">
 <tr>
   <td >
@@ -251,9 +247,9 @@ while($data = mysqli_fetch_assoc($req))
 
 <button type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
 </form>
-        </div>
-        </div>
+ </div>
 </div>
+
 
 <!-- Footer -->
 <?php include"footer.php" ?>
