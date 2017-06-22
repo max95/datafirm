@@ -48,12 +48,9 @@ $db=($ini_array['db']);
 $db = mysqli_connect($host, $login, $mdp,$db);
 
 // insertion des éléments dans la base de données
-$sql = 'INSERT INTO statistiques VALUES("",?,?,?,?,?,?)';
-$req_pre = mysqli_prepare($db, $sql);
+$sql = 'INSERT INTO statistiques VALUES("", "'.$date_courante.'", "'.$page_courante.'", "'.$ip.'", "'.$host.'", "'.$navigateur.'", "'.$referer.'")';
+mysqli_query($db,$sql) or die('Erreur : '.$sql.'<br />'.mysql_error());
 
-mysqli_stmt_bind_param($req_pre,"ssssss",$date_courante,$page_courante,$ip,$host,$navigateur,$referer);
-
-mysqli_stmt_execute($req_pre);
 // fermeture de la connexion à la base de données
-mysqli_close($db);
+mysqli_close();
 ?>

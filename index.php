@@ -90,6 +90,7 @@
 </div class="container marketing">
 <!-- container marketing -->
 
+
 <!-- Footer-->
 <?php include"footer.php" ?>
 
@@ -109,8 +110,7 @@
     <script src="js/creative.min.js"></script>
 
     <form action="#" method="GET">
-      <!-- statistiques -->
-      <?php include"record_stat.php"?>
+
 
 </body>
 
