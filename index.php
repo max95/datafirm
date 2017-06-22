@@ -64,28 +64,28 @@
         <div class="row">
           <div class="col-md-4 m-b-lg">
                     <div class="panel panel-default panel-profile m-b-0">
-                      <div class="panel-heading" style="background-image: url(images/voilier.jpg);"></div>
+                      <div class="panel-heading" style="background-image: url(images/voilier.jpeg);"></div>
                       <div class="panel-body text-center">
-                        <img class="panel-profile-img" src="images/jerome.png">
+                        <img class="panel-profile-img" src="images/jerome.jpeg">
                         <h5 class="panel-title">Jerome Bouchet</h5>
                         <p class="m-b">Apprenti Data Analyst.</p>
-                        <a href="https://www.linkedin.com/in/jerome-bouchet-375b28a2/" role="button " onclick="window.open(this.href); return false;"><img src="images\linkedin.png" class="img-rounded" title="lien vers linkedin"></a> 
-                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.png" class="img-rounded" title="lien vers viadeo"></a> 
-                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpg" class="img-rounded" title="lien vers facebook"></a>
+                        <a href="https://www.linkedin.com/in/jerome-bouchet-375b28a2/" role="button " onclick="window.open(this.href); return false;"><img src="images\linkedin.jpeg" class="img-rounded" title="lien vers linkedin"></a> 
+                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.jpeg" class="img-rounded" title="lien vers viadeo"></a> 
+                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpeg" class="img-rounded" title="lien vers facebook"></a>
                       </div>
                     </div>
           </div>
           <!--</div> col-md-4 m-b-lg -->
           <div class="col-md-4 m-b-lg">
                     <div class="panel panel-default panel-profile m-b-0">
-                      <div class="panel-heading" style="background-image: url(images/wallpaper_hugo1.jpg);"></div>
+                      <div class="panel-heading" style="background-image: url(images/wallpaper_hugo1.jpeg);"></div>
                       <div class="panel-body text-center">
-                        <img class="panel-profile-img" src="images/hugo.jpg">
+                        <img class="panel-profile-img" src="images/hugo.jpeg">
                         <h5 class="panel-title">Hugo Fichot</h5>
                         <p class="m-b">Apprenti Décisionnel.</p>
-                        <a href="https://www.linkedin.com/in/hugo-fichot-964322105/" role="button" onclick="window.open(this.href); return false;"><img src="images\linkedin.png" class="img-rounded" title="lien vers linkedin"></a> 
-                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.png" class="img-rounded" title="lien vers viadeo"></a> 
-                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpg" class="img-rounded" title="lien vers facebook"></a>
+                        <a href="https://www.linkedin.com/in/hugo-fichot-964322105/" role="button" onclick="window.open(this.href); return false;"><img src="images\linkedin.jpeg" class="img-rounded" title="lien vers linkedin"></a> 
+                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.jpeg" class="img-rounded" title="lien vers viadeo"></a> 
+                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpeg" class="img-rounded" title="lien vers facebook"></a>
                         </a>
                       </div>
                     </div>
@@ -93,14 +93,14 @@
           <!--</div> col-md-4 m-b-lg -->
           <div class="col-md-4 m-b-lg">
                     <div class="panel panel-default panel-profile m-b-0">
-                      <div class="panel-heading" style="background-image: url(images/wallpaper_chris.jpg);"></div>
+                      <div class="panel-heading" style="background-image: url(images/wallpaper_chris.jpeg);"></div>
                       <div class="panel-body text-center">
-                        <img class="panel-profile-img" src="images/chris.jpg">
+                        <img class="panel-profile-img" src="images/chris.jpeg">
                         <h5 class="panel-title">Christopher Clemoux</h5>
                         <p class="m-b">Apprenti Développeur.</p>
-                        <a href="https://www.linkedin.com/in/christopher-clemoux-830814145/" role="button" onclick="window.open(this.href); return false;"><img src="images\linkedin.png" class="img-rounded" title="lien vers linkedin"></a> 
-                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.png" class="img-rounded" title="lien vers viadeo"></a> 
-                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpg" class="img-rounded" title="lien vers facebook"></a>
+                        <a href="https://www.linkedin.com/in/christopher-clemoux-830814145/" role="button" onclick="window.open(this.href); return false;"><img src="images\linkedin.jpeg" class="img-rounded" title="lien vers linkedin"></a> 
+                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.jpeg" class="img-rounded" title="lien vers viadeo"></a> 
+                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpeg" class="img-rounded" title="lien vers facebook"></a>
                       </div>
                     </div>
           </div>
