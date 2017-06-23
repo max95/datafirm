@@ -81,7 +81,7 @@
         return req.responseText;
       }
       else{
-        return "vide";
+        return "48.858205, 2.294359";
       }
     }
     </script>
