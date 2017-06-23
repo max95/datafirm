@@ -40,7 +40,6 @@
   		<style>
   		#map_canvas{width:100%;height:350px;}
   		</style>
-
   <!-- Script donné par Google à linker avec sa page -->
       <script>
       <?php
@@ -65,8 +64,11 @@
           req.open("GET","recherche_famille.php?famille="+a,false);
           req.send(null);
           document.getElementById('famille').innerHTML=req.responseText;
-          document.getElementById('sousfamille').innerHTML="";
-          document.getElementById('codeape').innerHTML="";
+          document.getElementById('resultatfamille').disabled=false;
+          document.getElementById('resultatssfamille').innerHTML="";
+          document.getElementById('resultatssfamille').disabled=true;
+          document.getElementById('resultatcodeape').innerHTML="";
+          document.getElementById('resultatcodeape').disabled=true;
       }
       function sousfamille(){
           var req = new XMLHttpRequest();
@@ -76,6 +78,9 @@
           req.open("GET","recherche_ssfamille.php?sousfamille="+a,false);
           req.send(null);
           document.getElementById('sousfamille').innerHTML=req.responseText;
+          document.getElementById('resultatssfamille').disabled=false;
+          document.getElementById('resultatcodeape').innerHTML="";
+          document.getElementById('resultatcodeape').disabled=true;
       }
       function codeape(){
           var req = new XMLHttpRequest();
@@ -85,6 +90,17 @@
           req.open("GET","recherche_codeape.php?codeape="+a,false);
           req.send(null);
           document.getElementById('codeape').innerHTML=req.responseText;
+          document.getElementById('resultatcodeape').disabled=false;
+      }
+      function recherche(){
+
+        if (document.getElementById('resultatfamille') !=null){
+          console.log('it exists!');
+        }
+
+        if (document.getElementById('resultatfamillezzzz') ==null){
+          console.log('does not exist!');
+        }
       }
   		function initialize(){
 
@@ -132,13 +148,19 @@
       <?php
       if(ISSET($_GET['ape'])){
         $ape = $_GET['ape'];
-        $proximite = $_GET['rating'];
+        if(ISSET($_GET['rating'])){
+          $proximite = $_GET['rating'];
+        }
+        else{
+          $proximite = 10;
+        }
+
   		$db = mysqli_connect($host, $login, $mdp,$db) or die('Erreur de connexion : ' . mysqli_connect_error());
 
   		// on crée la requête SQL
   		$sql = "SELECT entreprise,lat,lon,numero,adresse,cp,ville, get_distance_metres('48.858205', '2.294359', lat, lon)
   		      AS proximite
-  		      FROM Entreprise where ape like '".$ape."'
+  		      FROM Entreprise where ape like '".$ape."%'
   		      HAVING proximite < ".$proximite." ORDER BY proximite ASC";
 
   		// on envoie la requête
@@ -207,7 +229,8 @@ while($data = mysqli_fetch_assoc($req))
 
  <div class="col-md-4">
  <div class="well">
-<form  oninput="level.value = rating.valueAsNumber" action="#" method="GET"><h4 style="color: black">Distance (km)</h4>
+<form  oninput="level.value = rating.valueAsNumber" action="#" method="GET">
+  <h4 style="color: black">Distance (km)</h4>
 <input name="rating" type="range" min="10" max="50" step="10" value="10"  id="rating" />
 <output for="flying" name="level" > <?php echo $_POST['rating'] ?>10</output>
 
@@ -218,34 +241,42 @@ while($data = mysqli_fetch_assoc($req))
 <button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
 <a class="btn btn-primary" style="background-color: Grey " href="liste_ape.php">Liste Code APE</a><br/>
 </form>
-
-<form action="#" method="post">
+<form  oninput="level.value = rating.valueAsNumber" action="#" method="GET">
 <tr>
   <td >
     <h4 style="color: black">Secteur</h4>
-    <form action="" method="GET">
-    <select id="secteur" onchange="famille()" class="form-control" style="color: black">
+    <select id="secteur" onclick="famille()" class="form-control" style="color: black">
       <?php include"recherche_secteur.php" ?>
     </select>
   </td>
 </tr>
 <tr>
   <td>
-    <div id="famille"></div>
+    <div id="famille">
+      <h4 style="color: black">Famille</h4>
+      <select id="resultatfamille" disabled="disabled" class="form-control" style="color: black">
+      </select>
+    </div>
   </td>
 </tr>
 <tr>
   <td>
-    <div id="sousfamille"></div>
+    <div id="sousfamille">
+      <h4 style="color: black">Sous-Famille</h4>
+      <select id="resultatssfamille" disabled="disabled" class="form-control" style="color: black">
+      </select>
+    </div>
   </td>
 </tr>
 <tr>
   <td>
-    <div id="codeape"></div>
+    <div id="codeape">
+      <h4 style="color: black">Code APE</h4>
+      <select id="resultatcodeape" disabled="disabled" class="form-control" style="color: black" >
+      </select>
+    </div>
   </td>
 </tr>
-<br>
-<button type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
 </form>
  </div>
 </div>

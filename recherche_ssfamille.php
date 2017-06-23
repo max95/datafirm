@@ -14,7 +14,7 @@ $sql = "select * from SousFamilleAPE WHERE FamAPE like '".$_GET["sousfamille"]."
 $req = mysqli_query($db,$sql);
 
 // on fait une boucle qui va faire un tour pour chaque enregistrement
-?><h4 style="color: black">Sous-Famille</h4><select id="resultatssfamille" onchange="codeape()" class="form-control" style="color: black" ><?php
+?><h4 style="color: black">Sous-Famille</h4><select id="resultatssfamille" onclick="codeape()" class="form-control" style="color: black" ><?php
 while($data = mysqli_fetch_assoc($req))
     {
       //echo "&lt;option value=\"".utf8_encode($data['LibSectionAPE'])."\"&gt;".utf8_encode($data['LibSectionAPE'])."&lt;/option&gt;";
