@@ -95,8 +95,10 @@
 <div class="header-content">
 <div class="col-md-8">
 
-    <form class="" action="#" method="GET">
+    <form id="" action="#" method="GET">
       <h4>Adresse :</h4><input type="text" name="adresse" id="monadresse" value="<?php echo $_GET["adresse"];?>"><button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button><br><br>
+      <input id="idmalatitude" name="malatitude" value="<?php echo $_GET["malatitude"]?>" type="hidden">
+      <input id="idmalongitude" name="malongitude" value="<?php echo $_GET["malongitude"]?>" type="hidden">
     </form>
 
   <!-- Emplacement de ma Map -->
@@ -134,6 +136,9 @@
         var coordonnees = adresse();
         var lat=coordonnees.substring(0,coordonnees.indexOf(",",0));
         var lng=coordonnees.substring(lat.length+1,40);
+
+        document.getElementById("idmalatitude").value = lat;
+        document.getElementById("idmalongitude").value = lng;
 
   			var map_canvas = document.getElementById('map_canvas');
 
@@ -177,11 +182,13 @@
         else{
           $proximite = 10;
         }
+        $lat = $_GET["malatitude"];
+        $lng = $_GET["malongitude"];
 
   		$db = mysqli_connect($host, $login, $mdp,$db) or die('Erreur de connexion : ' . mysqli_connect_error());
 
   		// on crée la requête SQL
-  		$sql = "SELECT entreprise,lat,lon,numero,adresse,cp,ville, get_distance_metres('48.858205', '2.294359', lat, lon)
+  		$sql = "SELECT entreprise,lat,lon,numero,adresse,cp,ville, get_distance_metres('".$lat."', '".$lng."', lat, lon)
   		      AS proximite
   		      FROM Entreprise where ape like '".$ape."%'
   		      HAVING proximite < ".$proximite." ORDER BY proximite ASC";
@@ -261,6 +268,9 @@ while($data = mysqli_fetch_assoc($req))
  <h4 style="color: black">Code APE</h4>
         <div class="input-group">
         <input name="ape" type="text" value="<?php echo $ape;?>"class="form-control"/>
+        <input name="adresse" value="<?php echo $_GET["adresse"]?>" type="hidden">
+        <input name="malatitude" value="<?php echo $_GET["malatitude"]?>" type="hidden">
+        <input name="malongitude" value="<?php echo $_GET["malongitude"]?>" type="hidden">
         </div><br/>
 <button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
 <a class="btn btn-primary" style="background-color: Grey " href="liste_ape.php">Liste Code APE</a><br/>
