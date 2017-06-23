@@ -25,6 +25,67 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <script>
+    function famille(){
+        var req = new XMLHttpRequest();
+        var a = document.getElementById('secteur').value;
+        console.log(a);
+        req.open("GET","recherche_famille.php?famille="+a,false);
+        req.send(null);
+        document.getElementById('famille').innerHTML=req.responseText;
+        document.getElementById('resultatfamille').disabled=false;
+        document.getElementById('resultatssfamille').innerHTML="";
+        document.getElementById('resultatssfamille').disabled=true;
+        document.getElementById('resultatcodeape').innerHTML="";
+        document.getElementById('resultatcodeape').disabled=true;
+    }
+    function sousfamille(){
+        var req = new XMLHttpRequest();
+        var a = document.getElementById('resultatfamille').value;
+        console.log(a);
+        //alert(a);
+        req.open("GET","recherche_ssfamille.php?sousfamille="+a,false);
+        req.send(null);
+        document.getElementById('sousfamille').innerHTML=req.responseText;
+        document.getElementById('resultatssfamille').disabled=false;
+        document.getElementById('resultatcodeape').innerHTML="";
+        document.getElementById('resultatcodeape').disabled=true;
+    }
+    function codeape(){
+        var req = new XMLHttpRequest();
+        var a = document.getElementById('resultatssfamille').value;
+        console.log(a);
+        //alert(a);
+        req.open("GET","recherche_codeape.php?codeape="+a,false);
+        req.send(null);
+        document.getElementById('codeape').innerHTML=req.responseText;
+        document.getElementById('resultatcodeape').disabled=false;
+    }
+    function recherche(){
+
+      if (document.getElementById('resultatfamille') !=null){
+        console.log('it exists!');
+      }
+
+      if (document.getElementById('resultatfamillezzzz') ==null){
+        console.log('does not exist!');
+      }
+    }
+    function adresse(){
+      var req = new XMLHttpRequest();
+      var a = document.getElementById('monadresse').value;
+      if (a!=""){
+        req.open("GET","geocodage.php?adresse="+a,false);
+        req.send(null);
+        return req.responseText;
+      }
+      else{
+        return "vide";
+      }
+    }
+    </script>
+
 </head>
 
 <body id="page-top">
@@ -33,9 +94,13 @@
 
 <div class="header-content">
 <div class="col-md-8">
-  <!-- Emplacement de ma Map -->
-  <div id="map_canvas"></div>
 
+    <form class="" action="#" method="GET">
+      <h4>Adresse :</h4><input type="text" name="adresse" id="monadresse" value="<?php echo $_GET["adresse"];?>"><button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button><br><br>
+    </form>
+
+  <!-- Emplacement de ma Map -->
+  <div id="map_canvas">  </div>
   <!-- Je mets du style pour donner une forme à mon emplacement de map -->
   		<style>
   		#map_canvas{width:100%;height:350px;}
@@ -57,51 +122,6 @@
       </script>
   <!-- Script pour dessinner sa map -->
   		<script>
-      function famille(){
-          var req = new XMLHttpRequest();
-          var a = document.getElementById('secteur').value;
-          console.log(a);
-          req.open("GET","recherche_famille.php?famille="+a,false);
-          req.send(null);
-          document.getElementById('famille').innerHTML=req.responseText;
-          document.getElementById('resultatfamille').disabled=false;
-          document.getElementById('resultatssfamille').innerHTML="";
-          document.getElementById('resultatssfamille').disabled=true;
-          document.getElementById('resultatcodeape').innerHTML="";
-          document.getElementById('resultatcodeape').disabled=true;
-      }
-      function sousfamille(){
-          var req = new XMLHttpRequest();
-          var a = document.getElementById('resultatfamille').value;
-          console.log(a);
-          //alert(a);
-          req.open("GET","recherche_ssfamille.php?sousfamille="+a,false);
-          req.send(null);
-          document.getElementById('sousfamille').innerHTML=req.responseText;
-          document.getElementById('resultatssfamille').disabled=false;
-          document.getElementById('resultatcodeape').innerHTML="";
-          document.getElementById('resultatcodeape').disabled=true;
-      }
-      function codeape(){
-          var req = new XMLHttpRequest();
-          var a = document.getElementById('resultatssfamille').value;
-          console.log(a);
-          //alert(a);
-          req.open("GET","recherche_codeape.php?codeape="+a,false);
-          req.send(null);
-          document.getElementById('codeape').innerHTML=req.responseText;
-          document.getElementById('resultatcodeape').disabled=false;
-      }
-      function recherche(){
-
-        if (document.getElementById('resultatfamille') !=null){
-          console.log('it exists!');
-        }
-
-        if (document.getElementById('resultatfamillezzzz') ==null){
-          console.log('does not exist!');
-        }
-      }
   		function initialize(){
 
         <?php
@@ -111,11 +131,14 @@
         $mdp=($ini_array['mdp']);
         $db=($ini_array['db']);
         ?>
+        var coordonnees = adresse();
+        var lat=coordonnees.substring(0,coordonnees.indexOf(",",0));
+        var lng=coordonnees.substring(lat.length+1,40);
 
   			var map_canvas = document.getElementById('map_canvas');
 
   			var map_options = {
-  				center: new google.maps.LatLng(48.858205, 2.294359),
+  				center: new google.maps.LatLng(lat, lng),
   				zoom: 10,
   				mapTypeId: google.maps.MapTypeId.ROADMAP
   				}
@@ -137,7 +160,7 @@
 
       //Pointeur d'Origine
       var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(48.858205, 2.294359),
+      position: new google.maps.LatLng(lat, lng),
       map: map,
       draggable:true,
       title:"DEPART",
@@ -192,6 +215,7 @@
   			if (navigator.userAgent.toLowerCase().indexOf('googlebot') === -1) {
   			// Lancement du script au chargement de la page
   			google.maps.event.addDomListener(window, 'load', initialize);
+        map.enableGoogleBar();
   			}
 
   		</script>
