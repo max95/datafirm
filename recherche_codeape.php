@@ -13,7 +13,7 @@ $sql = "select * from CodeAPE WHERE SsFamAPE like '".$_GET["codeape"]."'";
 $req = mysqli_query($db,$sql);
 
 // on fait une boucle qui va faire un tour pour chaque enregistrement
-?><h4 style="color: black">Code APE</h4><select id="resultatcodeape" onchange="codeape()" class="form-control" style="color: black" ><?php
+?><h4 style="color: black">Code APE</h4><select id="resultatcodeape" class="form-control" style="color: black" ><?php
 while($data = mysqli_fetch_assoc($req))
     {
       //echo "&lt;option value=\"".utf8_encode($data['LibSectionAPE'])."\"&gt;".utf8_encode($data['LibSectionAPE'])."&lt;/option&gt;";

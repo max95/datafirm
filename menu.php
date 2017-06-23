@@ -17,12 +17,13 @@
 
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   <ul class="nav navbar-nav">
-    <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span> Accueil</a></li>
-    <li class="active"><a href="recherche.php"><span class="glyphicon glyphicon-search"></span> Recherche</a></li>
-    <li class="active"><a href="statistic.php"><span class="glyphicon glyphicon-signal"></span> Statistic</a></li>
-    <li class="active"><a href="contact.php"><span class="glyphicon glyphicon-earphone"></span> Contact</a></li>
+    <li><a href="index.php"><span class="glyphicon glyphicon-home"></span> Accueil</a></li>
+    <li><a href="recherche.php"><span class="glyphicon glyphicon-search"></span> Recherche</a></li>
+    <li><a href="statistic.php"><span class="glyphicon glyphicon-signal"></span> Statistiques</a></li>
+    <li><a href="contact.php"><span class="glyphicon glyphicon-earphone"></span> Contact</a></li>
   </ul>
-</div>
-</div>
+  <img style="position:absolute; float:right; height:60px" src="images/beta.png" alt="" align=right>
 
+</div>
+</div>
 </nav>

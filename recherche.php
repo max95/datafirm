@@ -244,7 +244,7 @@ while($data = mysqli_fetch_assoc($req))
     <div id="codeape"></div>
   </td>
 </tr>
-
+<br>
 <button type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
 </form>
  </div>
