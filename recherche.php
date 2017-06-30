@@ -96,7 +96,7 @@
 <div class="col-md-8">
 
     <form id="" action="#" method="GET">
-      <h4>Adresse :</h4><input type="text" name="adresse" id="monadresse" value="<?php echo $_GET["adresse"];?>"><button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button><br><br>
+      <h4>Adresse :</h4><input type="text" name="adresse" id="monadresse" value="<?php echo $_GET['adresse'];?>" placeholder="ex: Paris"><button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button><br><br>
       <input id="idmalatitude" name="malatitude" value="<?php echo $_GET["malatitude"]?>" type="hidden">
       <input id="idmalongitude" name="malongitude" value="<?php echo $_GET["malongitude"]?>" type="hidden">
     </form>
@@ -178,12 +178,19 @@
         $ape = $_GET['ape'];
         if(ISSET($_GET['rating'])){
           $proximite = $_GET['rating'];
+          if(ISSET($_GET['paris'])){
+            $lat = $_GET["malatitude"];
+            $lng = $_GET["malongitude"];
+          }
+          else{
+            $lat = "48.858205";
+            $lng = "2.294359";
+          }
         }
         else{
           $proximite = 10;
         }
-        $lat = $_GET["malatitude"];
-        $lng = $_GET["malongitude"];
+
 
   		$db = mysqli_connect($host, $login, $mdp,$db) or die('Erreur de connexion : ' . mysqli_connect_error());
 
@@ -259,60 +266,73 @@ while($data = mysqli_fetch_assoc($req))
 </div>
 
  <div class="col-md-4">
- <div class="well">
-<form  oninput="level.value = rating.valueAsNumber" action="#" method="GET">
-  <h4 style="color: black">Distance (km)</h4>
-<input name="rating" type="range" min="10" max="50" step="10" value="10"  id="rating" />
-<output for="flying" name="level" > <?php echo $_POST['rating'] ?>10</output>
+   <div class="well">
+       <ul class="nav nav-tabs">
+      <li class="active"><a href="#code" data-toggle="tab">Par Code</a></li>
+      <li><a href="#menu" data-toggle="tab">Par Menu</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane active in" id="code">
+          <form id="tab" oninput="level.value = rating.valueAsNumber" action="#" method="GET">
+            <h4 style="color: black">Distance (km)</h4>
+            <input name="rating" type="range" min="10" max="50" step="10" value="<?php echo $_GET["rating"]?>"  id="rating" />
+            <output for="flying" name="level" >Choisir la distance<?php echo $_POST['rating'] ?></output>
 
- <h4 style="color: black">Code APE</h4>
-        <div class="input-group">
-        <input name="ape" type="text" value="<?php echo $ape;?>"class="form-control"/>
-        <input name="adresse" value="<?php echo $_GET["adresse"]?>" type="hidden">
-        <input name="malatitude" value="<?php echo $_GET["malatitude"]?>" type="hidden">
-        <input name="malongitude" value="<?php echo $_GET["malongitude"]?>" type="hidden">
-        </div><br/>
-<button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
-<a class="btn btn-primary" style="background-color: Grey " href="liste_ape.php">Liste Code APE</a><br/>
-</form>
-<form  oninput="level.value = rating.valueAsNumber" action="#" method="GET">
-<tr>
-  <td >
-    <h4 style="color: black">Secteur</h4>
-    <select id="secteur" onclick="famille()" class="form-control" style="color: black">
-      <?php include"recherche_secteur.php" ?>
-    </select>
-  </td>
-</tr>
-<tr>
-  <td>
-    <div id="famille">
-      <h4 style="color: black">Famille</h4>
-      <select id="resultatfamille" disabled="disabled" class="form-control" style="color: black">
-      </select>
+            <h4 style="color: black">Code APE</h4>
+            <div class="input-group">
+              <input name="ape" type="text" value="<?php echo $ape;?>"class="form-control" placeholder="ex: 0130"/>
+              <input name="adresse" value="<?php echo $_GET["adresse"]?>" type="hidden">
+              <input name="malatitude" value="<?php echo $_GET["malatitude"]?>" type="hidden">
+              <input name="malongitude" value="<?php echo $_GET["malongitude"]?>" type="hidden">
+            </div><br/>
+            <button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
+            <a class="btn btn-primary" style="background-color: Grey " href="liste_ape.php">Liste Code APE</a><br/>
+          </form>
+        </div>
+        <div class="tab-pane fade" id="menu">
+          <form id="tab2"oninput="level.value = rating.valueAsNumber" action="#" method="GET">
+            <h4 style="color: black">Distance (km)</h4>
+            <input name="rating" type="range" min="10" max="50" step="10" value="<?php echo $_GET["rating"]?>"  id="rating" />
+            <output for="flying" name="level" >Choisir la distance<?php echo $_POST['rating'] ?></output>
+            <input name="adresse" value="<?php echo $_GET["adresse"]?>" type="hidden">
+            <input name="malatitude" value="<?php echo $_GET["malatitude"]?>" type="hidden">
+            <input name="malongitude" value="<?php echo $_GET["malongitude"]?>" type="hidden">
+            <tr>
+              <td >
+                <h4 style="color: black">Secteur</h4>
+                <select id="secteur" onclick="famille()" class="form-control" style="color: black">
+                  <?php include"recherche_secteur.php" ?>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div id="famille">
+                  <h4 style="color: black">Famille</h4>
+                  <select id="resultatfamille" disabled="disabled" class="form-control" style="color: black"></select>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div id="sousfamille">
+                  <h4 style="color: black">Sous-Famille</h4>
+                  <select id="resultatssfamille" disabled="disabled" class="form-control" style="color: black"></select>
+                </div>
+              </td>
+          </tr>
+          <tr>
+            <td>
+              <div id="codeape">
+                <h4 style="color: black">Code APE</h4>
+                <select id="resultatcodeape" disabled="disabled" class="form-control" style="color: black" ></select>
+              </div>
+            </td>
+          </tr>
+      </form>
     </div>
-  </td>
-</tr>
-<tr>
-  <td>
-    <div id="sousfamille">
-      <h4 style="color: black">Sous-Famille</h4>
-      <select id="resultatssfamille" disabled="disabled" class="form-control" style="color: black">
-      </select>
+     </div>
     </div>
-  </td>
-</tr>
-<tr>
-  <td>
-    <div id="codeape">
-      <h4 style="color: black">Code APE</h4>
-      <select id="resultatcodeape" disabled="disabled" class="form-control" style="color: black" >
-      </select>
-    </div>
-  </td>
-</tr>
-</form>
- </div>
 </div>
 
 
