@@ -178,7 +178,7 @@
         $ape = $_GET['ape'];
         if(ISSET($_GET['rating'])){
           $proximite = $_GET['rating'];
-          if(ISSET($_GET['paris'])){
+          if(ISSET($_GET['adresse'])){
             $lat = $_GET["malatitude"];
             $lng = $_GET["malongitude"];
           }
