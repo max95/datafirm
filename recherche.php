@@ -203,8 +203,8 @@
                     <div class="input-group">
                         <input name="ape" type="text" value="<?php echo $ape;?>"class="form-control" placeholder="ex: 0130"/>
                         <input name="adresse" value="<?php echo $_GET["adresse"]?>" type="hidden">
-                        <input name="malatitude" value="<?php echo $_GET["malatitude"]?>" type="text">
-                        <input name="malongitude" value="<?php echo $_GET["malongitude"]?>" type="text">
+                        <input name="malatitude" value="<?php echo $_GET["malatitude"]?>" type="hidden">
+                        <input name="malongitude" value="<?php echo $_GET["malongitude"]?>" type="hidden">
                     </div><br/>
                   <button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
                   <a class="btn btn-primary" style="background-color: Grey " href="liste_ape.php">Liste Code APE</a><br/>
