@@ -29,31 +29,31 @@
 
 <div class="jumbotron">
   <h1>Contact</h1>
-  <p>Voici la parti qui vas vous permettrre d'améliorer notre site. Nous vous remercions d'avance pour les remarques constructives que vous allez nous laissé. </p>
+  <p>Voici la partie qui va vous permettre d'améliorer notre site. Nous vous remercions d'avance pour les remarques constructives que vous allez nous laisser. </p>
 </div>
 
 
 <div class="container-fluid">
 
 <div class="col-md-4" >
-  
+
   <div class="input-group">
     <span class="input-group-addon">Nom</span>
-    <input type="text" class="form-control" placeholder="Nom">
+    <input type="text" class="form-control" placeholder="ex: Gourdier">
   </div> </br>
   <div class="input-group">
     <span class="input-group-addon">Prénom</span>
-    <input type="text" class="form-control" placeholder="Prénom">
+    <input type="text" class="form-control" placeholder="ex: Nils">
   </div> </br>
 
   <div class="input-group">
     <span class="input-group-addon">@</span>
-    <input type="text" class="form-control" placeholder="adresse mail">
+    <input type="text" class="form-control" placeholder="ex: nom.prenom@orange.fr">
   </div> </br>
 
   <div class="input-group">
     <span class="input-group-addon">N°</span>
-    <input type="text" class="form-control" placeholder="tèl:">
+    <input type="text" class="form-control" placeholder="ex: 01.02.03.04.05">
   </div></br>
 
 </div>
