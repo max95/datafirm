@@ -23,171 +23,70 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <style>
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    #map {width:100%;height:350px;}
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .controls {
+      margin-top: 10px;
+      border: 1px solid transparent;
+      border-radius: 2px 0 0 2px;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      height: 32px;
+      outline: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
 
-    <script>
-      function adresse(){
-        var req = new XMLHttpRequest();
-        var a = document.getElementById('monadresse').value;
-        if (a!=""){
-          req.open("GET","geocodage.php?adresse="+a,false);
-          req.send(null);
-          return req.responseText;
-        }
-        else{
-          //adresse par défaut
-          return "48.858205, 2.294359";
-        }
-      }
-    </script>
+    #pac-input {
+      background-color: #fff;
+      font-family: Roboto;
+      font-size: 15px;
+      font-weight: 300;
+      margin-left: 12px;
+      padding: 0 11px 0 13px;
+      text-overflow: ellipsis;
+      width: 300px;
+    }
+
+    #pac-input:focus {
+      border-color: #4d90fe;
+    }
+
+    .pac-container {
+      font-family: Roboto;
+    }
+
+    </style>
 </head>
 <body id="page-top">
   <?php include"menu.php" ?>
     <div class="header-content">
     <div class="col-md-8">
-        <form id="" action="#" method="GET">
-          <h4>Adresse :</h4><input type="text" name="adresse" id="monadresse" value="<?php echo $_GET['adresse'];?>" placeholder="ex: Paris"><button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button><br><br>
-          <input id="idmalatitude" name="malatitude" value="<?php echo $_GET["malatitude"]?>" type="hidden">
-          <input id="idmalongitude" name="malongitude" value="<?php echo $_GET["malongitude"]?>" type="hidden">
-        </form>
-      <!-- Emplacement de ma Map -->
-      <div id="map_canvas">  </div>
-      <!-- Je mets du style pour donner une forme à mon emplacement de map -->
-      <style>#map_canvas{width:100%;height:350px;}</style>
-      <!-- Script donné par Google à linker avec sa page -->
-      <script>
-              <?php
-              $ini_array = parse_ini_file("config.ini"); ?>
-              var GOOGLE_MAP_KEY = " <?php echo ($ini_array['google']); ?>";
+      <input id="pac-input" class="controls" type="text"
+          placeholder="Enter a location">
+      <input id="idmalatitude" name="malatitude" type="text">
+      <input id="idmalongitude" name="malongitude" type="text">
+      <input id="proximite" name="rating" type="text">
+      <input id="activite" name="ape" type="text">
+      <input onclick="clearMarkers();" type=button value="Hide Markers">
+      <input onclick="showMarkers();" type=button value="Show All Markers">
+      <input onclick="deleteMarkers();" type=button value="Delete Markers">
 
-              function loadScript() {
-                var script = document.createElement('script');
-                script.type = 'text/javascript';
-                script.src = 'https://maps.googleapis.com/maps/api/js' +
-                    '?key=' + GOOGLE_MAP_KEY +'&callback=initialize'; //& needed
-                document.body.appendChild(script);
-              }
-              window.onload = loadScript;
-      </script>
-      <!-- Script pour dessinner sa map -->
-      <script>
-      		function initialize(){
-            <?php
-            $ini_array = parse_ini_file("config.ini");
-            $host=($ini_array['host']);
-            $login=($ini_array['login']);
-            $mdp=($ini_array['mdp']);
-            $db=($ini_array['db']);
-            ?>
-            //Géocode l'adresse
-            var coordonnees = adresse();
-            //Sépare la longitute et la latitude
-            var lat=coordonnees.substring(0,coordonnees.indexOf(",",0));
-            var lng=coordonnees.substring(lat.length+1,40);
-
-            document.getElementById("idmalatitude").value = lat;
-            document.getElementById("idmalongitude").value = lng;
-
-      			var map_canvas = document.getElementById('map_canvas');
-      			var map_options = {
-      				center: new google.maps.LatLng(lat, lng),
-      				zoom: 10,
-      				mapTypeId: google.maps.MapTypeId.ROADMAP
-      				}
-      			var map = new google.maps.Map(map_canvas, map_options)
-      			//--> Configuration de l'icône personnalisée
-        		var image = {
-          			// Adresse de l'icône personnalisée - Attention il faut que le .png existe
-          			url: 'drapeau.png',
-          			// Taille de l'icône personnalisée
-          			size: new google.maps.Size(40, 40),
-          			// Origine de l'image, souvent (0, 0)
-          			origin: new google.maps.Point(0,0),
-          			// L'ancre de l'image. Correspond au point de l'image que l'on raccroche à la carte. Par exemple, si votre îcone est un drapeau, cela correspond à son mâts
-          			anchor: new google.maps.Point(20, 40)
-        		};
-            //Pointeur d'Origine
-            var marker = new google.maps.Marker({
-              position: new google.maps.LatLng(lat, lng),
-              map: map,
-              draggable:true,
-              title:"DEPART",
-              // On définit l'icône de ce marker comme étant l'image définie juste au-dessus
-              //icon: image
-            });
-          <?php
-          if(ISSET($_GET['ape'])){
-              $ape = $_GET['ape'];
-              if(ISSET($_GET['rating'])){
-                  $proximite = $_GET['rating'];
-                  //Permet d'avoir des résultats si aucune adresse n'est saisie
-                  if(ISSET($_GET['adresse']) AND ($_GET['adresse']!="")){
-                      $lat = $_GET["malatitude"];
-                      $lng = $_GET["malongitude"];
-                  }
-                  else{
-                      $lat = "48.858205";
-                      $lng = "2.294359";
-                }
-            }
-            else{
-                $proximite = 10;
-            }
-      		$db = mysqli_connect($host, $login, $mdp,$db) or die('Erreur de connexion : ' . mysqli_connect_error());
-      		// on crée la requête SQL
-      		$sql = "SELECT entreprise,lat,lon,numero,adresse,cp,ville, get_distance_metres('".$lat."', '".$lng."', lat, lon)
-      		      AS proximite
-      		      FROM Entreprise where ape like '".$ape."%'
-      		      HAVING proximite < ".$proximite." ORDER BY proximite ASC";
-      		// on envoie la requête
-      		$req = mysqli_query($db, $sql) or die('Erreur de connexion : ' . mysqli_connect_error());
-      		// on fait une boucle qui va faire un tour pour chaque enregistrement
-      		while($data = mysqli_fetch_assoc($req))
-      		    {?>
-      		    // on affiche les informations de l'enregistrement en cours
-      		    //echo $data['nom_commune'].' '.$data['lat'].' '.$data['lon'].'</i><br>';
-      				var marker = new google.maps.Marker({
-      				position: new google.maps.LatLng(<?php echo $data['lat'];?>,<?php echo $data['lon'];?>),
-      				map: map,
-      				title:"<?php echo $data['entreprise'];?>",
-      				// On définit l'icône de ce marker comme étant l'image définie juste au-dessus
-      				icon: image
-      				});<?php
-            }}?>
-          }
-      			// Astuce pour ne pas afficher la map lorsqu'il s'agit du référenceur de Google
-      			if (navigator.userAgent.toLowerCase().indexOf('googlebot') === -1) {
-      			// Lancement du script au chargement de la page
-      			google.maps.event.addDomListener(window, 'load', initialize);
-            map.enableGoogleBar();
-      			}
-      </script>
+      <div id="map"></div>
       <hr class="featurette-divider">
-      <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-        <thead>
-             <tr>
-                <th>Distance</th>
-                <th>Nom</th>
-                <th>Adresse</th>
-                <th>CP</th>
-                <th>Ville</th>
-            </tr>
-        </thead>
-        <?php
-        mysqli_data_seek ($req, 0);
-        while($data = mysqli_fetch_assoc($req))
-            {?>
-              <tr>
-                <th><?php echo $data['proximite'];?></th>
-                <th><?php echo $data['entreprise'];?></th>
-                <th><?php echo $data['numero'].' '.$data['adresse'];?></th>
-                <th><?php echo $data['cp'];?></th>
-                <th><?php echo $data['ville'];?></th>
-              </tr><?php
-            } ?>
-      </table>
+
     <!--div class="col-md-8"-->
     </div>
     <div class="col-md-4">
+      <h4 style="color: black">Distance (km)</h4>
+      <input name="rating" type="range" min="10" max="50" step="10" onchange="proximite()" id="rating" />
+      <output for="flying" name="level" >Choisir la distance<?php echo $_POST['rating'] ?></output>
       <div class="well">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#code" data-toggle="tab">Par Code</a></li>
@@ -196,25 +95,19 @@
           <div id="myTabContent" class="tab-content">
                 <div class="tab-pane active in" id="code">
                   <form id="tab" oninput="level.value = rating.valueAsNumber" action="#" method="GET">
-                    <h4 style="color: black">Distance (km)</h4>
-                    <input name="rating" type="range" min="10" max="50" step="10" value="<?php echo $_GET["rating"]?>"  id="rating" />
-                    <output for="flying" name="level" >Choisir la distance<?php echo $_POST['rating'] ?></output>
+
+
                     <h4 style="color: black">Code APE</h4>
                     <div class="input-group">
-                        <input name="ape" type="text" value="<?php echo $ape;?>"class="form-control" placeholder="ex: 0130"/>
-                        <input name="adresse" value="<?php echo $_GET["adresse"]?>" type="hidden">
-                        <input name="malatitude" value="<?php echo $_GET["malatitude"]?>" type="hidden">
-                        <input name="malongitude" value="<?php echo $_GET["malongitude"]?>" type="hidden">
+                        <input id="codeape" ONKEYUP="activite()" name="ape" type="text" class="form-control" placeholder="ex: 0130"/>
                     </div><br/>
                   <button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
                   <a class="btn btn-primary" style="background-color: Grey " href="liste_ape.php">Liste Code APE</a><br/>
+                  <a class="btn btn-primary" style="background-color: Grey " onclick="recherche_activite()">test</a><br/>
                 </form>
               </div>
               <div class="tab-pane fade" id="menu">
                   <form id="tab2"oninput="level.value = rating.valueAsNumber" action="#" method="GET">
-                      <h4 style="color: black">Distance (km)</h4>
-                      <input name="rating" type="range" min="10" max="50" step="10" value="<?php echo $_GET["rating"]?>"  id="rating" />
-                      <output for="flying" name="level" >Choisir la distance<?php echo $_POST['rating'] ?></output>
                       <input name="adresse" value="<?php echo $_GET["adresse"]?>" type="hidden">
                       <input name="malatitude" value="<?php echo $_GET["malatitude"]?>" type="hidden">
                       <input name="malongitude" value="<?php echo $_GET["malongitude"]?>" type="hidden">
@@ -241,6 +134,145 @@
     </div>
     <!-- Footer -->
     <?php include"footer.php" ?>
+    <!-- Script donné par Google à linker avec sa page -->
+    <script>
+
+      // In the following example, markers appear when the user clicks on the map.
+      // Each marker is labeled with a single alphabetical character.
+      var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      var labelIndex = 0;
+      var map;
+      var markers = [];
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      function initMap() {
+        var lcsc = {lat: 48.849766, lng: 2.13250400000004};
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 48.85661400000001, lng: 2.3522219000000177},
+          zoom: 13
+        });
+        // This event listener will call addMarker() when the map is clicked.
+        map.addListener('click', function(event) {
+          addMarker(event.latLng);
+        });
+
+        var input = /** @type {!HTMLInputElement} */(
+            document.getElementById('pac-input'));
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        //autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+          map: map,
+          anchorPoint: new google.maps.Point(0, -29)
+        });
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+          }
+
+          // If the place has a geometry, then present it on a map.
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+          }
+          marker.setIcon(/** @type {google.maps.Icon} */({
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(35, 35)
+          }));
+          marker.setPosition(place.geometry.location);
+
+          //Récupération de lat et lng pour calculs ultérieurs
+          var latlng = JSON.stringify(place.geometry.location);
+          var lat=latlng.substring(7,latlng.indexOf(",",0));
+          var lng=latlng.substring(lat.length+14,latlng.length-1);
+          document.getElementById("idmalatitude").value = lat;
+          document.getElementById("idmalongitude").value = lng;
+
+          marker.setVisible(true);
+
+          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+          infowindow.open(map, marker);
+        });
+      }
+
+      // Adds a marker to the map and push to the array.
+      function addMarker(location) {
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map
+        });
+        markers.push(marker);
+      }
+    </script>
+
+    <script type="text/javascript">
+    function activite(){
+      var activite = document.getElementById("codeape").value;
+      document.getElementById("activite").value= activite;
+    }
+
+    function proximite(){
+      var rating = document.getElementById("rating").value;
+      document.getElementById("proximite").value= rating;
+    }
+    function recherche_activite(){
+      var lat = document.getElementById("idmalatitude").value;
+      var lng = document.getElementById("idmalongitude").value;
+      var proximite = document.getElementById("proximite").value;
+      var activite = document.getElementById("activite").value
+
+      var req = new XMLHttpRequest();
+      req.open("GET","recherche_entreprise.php?lat="+lat+"&lng="+lng+"&proximite="+proximite+"&ape="+activite,false);
+      req.send(null);
+    }
+    </script>
+    <script type="text/javascript">
+    // Sets the map on all markers in the array.
+    function setMapOnAll(map) {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+      }
+    }
+
+    // Removes the markers from the map, but keeps them in the array.
+    function clearMarkers() {
+      setMapOnAll(null);
+    }
+
+    // Shows any markers currently in the array.
+    function showMarkers() {
+      setMapOnAll(map);
+    }
+
+    // Deletes all markers in the array by removing references to them.
+    function deleteMarkers() {
+      clearMarkers();
+      markers = [];
+    }
+
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb-W-2g7z3d5oYWVnFm4gnBbRkN3NQenw&libraries=places&callback=initMap"></script>
+
+
 
     <!-- Menu Recherche Activité -->
     <script src="js/recherche_activite.js"></script>
