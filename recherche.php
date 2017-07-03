@@ -72,13 +72,10 @@
       <div id="divisionResultat"></div>
       <input id="pac-input" class="controls" type="text"
           placeholder="Enter a location">
-      <input id="idmalatitude" name="malatitude" type="text">
-      <input id="idmalongitude" name="malongitude" type="text">
-      <input id="proximite" name="rating" type="text">
-      <input id="activite" name="ape" type="text">
-      <input onclick="clearMarkers();" type=button value="Hide Markers">
-      <input onclick="showMarkers();" type=button value="Show All Markers">
-      <input onclick="deleteMarkers();" type=button value="Delete Markers">
+      <input id="idmalatitude" name="malatitude" type="hidden">
+      <input id="idmalongitude" name="malongitude" type="hidden">
+      <input id="proximite" name="rating" type="hidden">
+      <input id="activite" name="ape" type="hidden">
 
       <div id="map"></div>
       <hr class="featurette-divider">
@@ -103,16 +100,12 @@
                     <div class="input-group">
                         <input id="codeape" ONKEYUP="activite()" name="ape" type="text" class="form-control" placeholder="ex: 0130"/>
                     </div><br/>
-                  <button onclick="initialize()" type="submit" class="btn btn-primary" style="background-color: Grey ">Rechercher</button>
+                  <a onclick="recherche_activite()"class="btn btn-primary" style="background-color: Grey ">Rechercher</a>
                   <a class="btn btn-primary" style="background-color: Grey " href="liste_ape.php">Liste Code APE</a><br/>
-                  <a class="btn btn-primary" style="background-color: Grey " onclick="recherche_activite()">test</a><br/>
                 </form>
               </div>
               <div class="tab-pane fade" id="menu">
                   <form id="tab2"oninput="level.value = rating.valueAsNumber" action="#" method="GET">
-                      <input name="adresse" value="<?php echo $_GET["adresse"]?>" type="hidden">
-                      <input name="malatitude" value="<?php echo $_GET["malatitude"]?>" type="hidden">
-                      <input name="malongitude" value="<?php echo $_GET["malongitude"]?>" type="hidden">
                       <tr>
                           <td ><h4 style="color: black">Secteur</h4><select id="secteur" onclick="famille()" class="form-control" style="color: black"><?php include"recherche_secteur.php" ?></select></td>
                       </tr>
