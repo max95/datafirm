@@ -144,6 +144,7 @@
       var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
       var labelIndex = 0;
       var map;
+      var donneesJSON;
       var markers = [];
 
       // This example requires the Places library. Include the libraries=places
@@ -243,6 +244,9 @@
       var proximite = document.getElementById("proximite").value;
       var activite = document.getElementById("activite").value;
 
+      //Suppression des markers existants
+      deleteMarkers();
+
       /* Association de la variable resultat
       à la division d’affichage divisionResultat */
       var resultat = document.getElementById("divisionResultat");
@@ -278,7 +282,7 @@
                   //alert("responseText : " + httpRequest.responseText);
 
                   /* Conversion du flux JSON en objets JavaScript */
-                  var donneesJSON = JSON.parse(httpRequest.responseText);
+                  donneesJSON = JSON.parse(httpRequest.responseText);
 
                   /* Initialisation de la variable resultat */
                   resultat.innerHTML = "";
@@ -296,6 +300,8 @@
                                position: new google.maps.LatLng(donneesJSON[obj].lat, donneesJSON[obj].lon),
                                map: map
                              });
+                        //Nécessaire pour la suppresion des markers ultérieurs
+                         markers.push(marker);
 
                          }
                   }
