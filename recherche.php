@@ -68,6 +68,8 @@
   <?php include"menu.php" ?>
     <div class="header-content">
     <div class="col-md-8">
+      <!-- Division d’affichage du résultat -->
+      <div id="divisionResultat"></div>
       <input id="pac-input" class="controls" type="text"
           placeholder="Enter a location">
       <input id="idmalatitude" name="malatitude" type="text">
@@ -234,15 +236,76 @@
       var rating = document.getElementById("rating").value;
       document.getElementById("proximite").value= rating;
     }
+
     function recherche_activite(){
       var lat = document.getElementById("idmalatitude").value;
       var lng = document.getElementById("idmalongitude").value;
       var proximite = document.getElementById("proximite").value;
-      var activite = document.getElementById("activite").value
+      var activite = document.getElementById("activite").value;
 
-      var req = new XMLHttpRequest();
-      req.open("GET","recherche_entreprise.php?lat="+lat+"&lng="+lng+"&proximite="+proximite+"&ape="+activite,false);
-      req.send(null);
+      /* Association de la variable resultat
+      à la division d’affichage divisionResultat */
+      var resultat = document.getElementById("divisionResultat");
+      /* Instanciation d’un objet de type XMLHttpRequest
+      /* NB : XMLHttpRequest est un objet ActiveX
+      ou JavaScript qui permet d’obtenir des données
+      au format XML, JSON, mais aussi HTML ou encore texte
+      simple à l’aide de requêtes HTTP. */
+      if (window.XMLHttpRequest) {
+          // Code pour IE7+, Firefox, Chrome, Opera, Safari
+          httpRequest = new XMLHttpRequest();
+      } else {
+          // Code pour IE6, IE5
+          httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      /* Ouverture du fichier voitures.json
+      via le script PHP serveurJSON */
+      /* true : mode asynchrone -> le flux doit être
+      disponible entièrement avant son traitement */
+      httpRequest.open("GET", "recherche_entreprise.php?lat="+lat+"&lng="+lng+"&proximite="+proximite+"&ape="+activite, true);
+
+      /* Définition du type de flux */
+      httpRequest.setRequestHeader("Content-type", "application/json");
+      /* Traitement effectué dès que le flux est disponible */
+      httpRequest.onreadystatechange = function() {
+
+          /* Test si requête terminée et test status OK */
+          if (httpRequest.readyState == 4 && httpRequest.status == 200)
+          {
+                  /* Affichages de contrôle */
+                  //alert("readystate : "+ httpRequest.readyState);
+                  //alert("status : "+ httpRequest.status);
+                  //alert("responseText : " + httpRequest.responseText);
+
+                  /* Conversion du flux JSON en objets JavaScript */
+                  var donneesJSON = JSON.parse(httpRequest.responseText);
+
+                  /* Initialisation de la variable resultat */
+                  resultat.innerHTML = "";
+
+                  /* Parcours des objets JavaScript */
+                  for (var obj in donneesJSON)
+                  {
+                         /*{lat: 48.85661400000001, lng: 2.3522219000000177}*/
+                         /* Concaténation du résultat (une ligne par
+                         enregistrement JSON) + un trait de séparation */
+                         /*resultat.innerHTML += "{lat: "+donneesJSON[obj].lat + ", lng: " +
+                         donneesJSON[obj].lon + "} <br>";*/
+
+                         var marker = new google.maps.Marker({
+                               position: new google.maps.LatLng(donneesJSON[obj].lat, donneesJSON[obj].lon),
+                               map: map
+                             });
+
+                         }
+                  }
+          }
+
+      /* Pas d’envoi de données au travers de la requête XMLHttpRequest */
+      httpRequest.send(null);
+
+      /* Message affiché en attente du traitement du fichier voitures.json */
+      resultat.innerHTML = "Attente de traitement JSON ...";
     }
     </script>
     <script type="text/javascript">
