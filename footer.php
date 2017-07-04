@@ -2,7 +2,7 @@
 <!-- statistiques -->
   <?php include"record_stat.php" ?>
   <div class="container">
-    <p class="text-muted">DataFirm</p>
+    <p class="text-muted"></p>
   </div>
 </footer>
         <!-- Footer -->

@@ -79,7 +79,19 @@
 
       <div id="map"></div>
       <hr class="featurette-divider">
-
+      <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+      <thead>
+       <tr>
+        <th>Distance</th>
+        <th>Nom</th>
+        <th>Adresse</th>
+        <th>CP</th>
+        <th>Ville</th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
     <!--div class="col-md-8"-->
     </div>
     <div class="col-md-4">
@@ -89,7 +101,7 @@
       <div class="well">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#code" data-toggle="tab">Par Code</a></li>
-            <li><a href="#menu" data-toggle="tab">Par Menu</a></li>
+            <li><a href="#menu" data-toggle="--tab">Par Menu</a></li>
           </ul>
           <div id="myTabContent" class="tab-content">
                 <div class="tab-pane active in" id="code">
@@ -149,7 +161,7 @@
 
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 48.85661400000001, lng: 2.3522219000000177},
-          zoom: 13
+          zoom: 10
         });
         // This event listener will call addMarker() when the map is clicked.
         map.addListener('click', function(event) {
@@ -240,6 +252,11 @@
       //Suppression des markers existants
       deleteMarkers();
 
+      //Supression du tableau précédocument
+      var table = $('#dataTables-example').DataTable();
+      table
+        .clear()
+        .draw();
       /* Association de la variable resultat
       à la division d’affichage divisionResultat */
       var resultat = document.getElementById("divisionResultat");
@@ -296,6 +313,16 @@
                         //Nécessaire pour la suppresion des markers ultérieurs
                          markers.push(marker);
 
+                        /* Creation du tableau de restitution*/
+                        var table = $('#dataTables-example').DataTable();
+                        table.rows.add( [ {
+                                0: donneesJSON[obj].proximite,
+                                1: donneesJSON[obj].entreprise,
+                                2: donneesJSON[obj].numero+" "+donneesJSON[obj].adresse,
+                                3: donneesJSON[obj].cp,
+                                4: donneesJSON[obj].ville
+                            } ] )
+                            .draw();
                          }
                   }
           }
@@ -356,6 +383,7 @@
         $('#dataTables-example').dataTable();
     });
     </script>
+
 
     <!-- statistiques -->
     <?php include"record_stat.php" ?>
