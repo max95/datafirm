@@ -192,7 +192,7 @@
             map.fitBounds(place.geometry.viewport);
           } else {
             map.setCenter(place.geometry.location);
-            map.setZoom(17);  // Why 17? Because it looks good.
+            map.setZoom(10);  // Why 17? Because it looks good.
           }
           marker.setIcon(/** @type {google.maps.Icon} */({
             url: place.icon,
@@ -302,6 +302,7 @@
                          var marker = new google.maps.Marker({
                                icon: image,
                                position: new google.maps.LatLng(donneesJSON[obj].lat, donneesJSON[obj].lon),
+                               title: donneesJSON[obj].entreprise,
                                map: map
                              });
                         //Nécessaire pour la suppresion des markers ultérieurs
