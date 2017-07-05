@@ -157,15 +157,10 @@
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
       function initMap() {
-        var lcsc = {lat: 48.849766, lng: 2.13250400000004};
-
+        //Construction de la map, centré sur Paris
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 48.85661400000001, lng: 2.3522219000000177},
           zoom: 10
-        });
-        // This event listener will call addMarker() when the map is clicked.
-        map.addListener('click', function(event) {
-          addMarker(event.latLng);
         });
 
         var input = /** @type {!HTMLInputElement} */(
@@ -220,15 +215,6 @@
           infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
           infowindow.open(map, marker);
         });
-      }
-
-      // Adds a marker to the map and push to the array.
-      function addMarker(location) {
-        var marker = new google.maps.Marker({
-          position: location,
-          map: map
-        });
-        markers.push(marker);
       }
     </script>
 
@@ -297,16 +283,24 @@
                   /* Initialisation de la variable resultat */
                   resultat.innerHTML = "";
 
+                  //Définition du marqueur
+                  var image = {
+                    // Adresse de l'icône personnalisée - Attention il faut que le .png existe
+                    url: 'images/drapeau.png',
+                    // Taille de l'icône personnalisée
+                    size: new google.maps.Size(40, 40),
+                    // Origine de l'image, souvent (0, 0)
+                    origin: new google.maps.Point(0,0),
+                    // L'ancre de l'image. Correspond au point de l'image que l'on raccroche à la carte. Par exemple, si votre îcone est un drapeau, cela correspond à son mâts
+                    anchor: new google.maps.Point(20, 40)
+                  };
+
                   /* Parcours des objets JavaScript */
                   for (var obj in donneesJSON)
                   {
-                         /*{lat: 48.85661400000001, lng: 2.3522219000000177}*/
-                         /* Concaténation du résultat (une ligne par
-                         enregistrement JSON) + un trait de séparation */
-                         /*resultat.innerHTML += "{lat: "+donneesJSON[obj].lat + ", lng: " +
-                         donneesJSON[obj].lon + "} <br>";*/
 
                          var marker = new google.maps.Marker({
+                               icon: image,
                                position: new google.maps.LatLng(donneesJSON[obj].lat, donneesJSON[obj].lon),
                                map: map
                              });
