@@ -96,8 +96,8 @@
     </div>
     <div class="col-md-4">
       <h4 style="color: black">Distance (km)</h4>
-      <input name="rating" type="range" min="10" max="50" step="10" onchange="proximite()" id="rating" />
-      <output for="flying" name="level" >Choisir la distance<?php echo $_POST['rating'] ?></output>
+      <input name="rating" type="range" min="10" max="50" step="10" value="10" onchange="proximite()" id="rating" />
+      <output id="rating_selectionne" for="flying" name="level" >Choisir la distance</output>
       <div class="well">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#code" data-toggle="tab">Par Code</a></li>
@@ -105,19 +105,14 @@
           </ul>
           <div id="myTabContent" class="tab-content">
                 <div class="tab-pane active in" id="code">
-                  <form id="tab" oninput="level.value = rating.valueAsNumber" action="#" method="GET">
-
-
                     <h4 style="color: black">Code APE</h4>
                     <div class="input-group">
                         <input id="codeape" ONKEYUP="activite()" name="ape" type="text" class="form-control" placeholder="ex: 0130"/>
                     </div><br/>
                   <a onclick="recherche_activite()"class="btn btn-primary" style="background-color: Grey ">Rechercher</a>
                   <a class="btn btn-primary" style="background-color: Grey " href="liste_ape.php">Liste Code APE</a><br/>
-                </form>
               </div>
               <div class="tab-pane fade" id="menu">
-                  <form id="tab2"oninput="level.value = rating.valueAsNumber" action="#" method="GET">
                       <tr>
                           <td ><h4 style="color: black">Secteur</h4><select id="secteur" onclick="famille()" class="form-control" style="color: black"><?php include"recherche_secteur.php" ?></select></td>
                       </tr>
@@ -130,7 +125,6 @@
                       <tr>
                           <td><div id="codeape"><h4 style="color: black">Code APE</h4><select id="resultatcodeape" disabled="disabled" class="form-control" style="color: black" ></select></div></td>
                       </tr>
-                  </form>
               <!--class="tab-pane fade"-->
               </div>
             <!--id="myTabContent" class="tab-content"-->
@@ -157,6 +151,12 @@
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
       function initMap() {
+        //Selectionne la proximité à 10 au départ
+        document.getElementById("proximite").value= 10;
+        document.getElementById("idmalatitude").value =48.85661400000001;
+        document.getElementById("idmalongitude").value =2.3522219000000177;
+
+
         //Construction de la map, centré sur Paris
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 48.85661400000001, lng: 2.3522219000000177},
@@ -227,6 +227,7 @@
     function proximite(){
       var rating = document.getElementById("rating").value;
       document.getElementById("proximite").value= rating;
+      document.getElementById("rating_selectionne").innerHTML= rating;
     }
 
     function recherche_activite(){
