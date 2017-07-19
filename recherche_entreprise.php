@@ -1,3 +1,5 @@
+<!-- statistiques -->
+<?php include"record_stat.php" ?>
 <?php
 //http://localhost/datafirm/recherche_entreprise.php?lat=48.858205&lng=2.294359&proximite=10&ape=0130
 
@@ -33,5 +35,3 @@ echo $donneesJSON;
 
 mysqli_close($db);
 ?>
-<!-- statistiques -->
-<?php include"record_stat.php" ?>
