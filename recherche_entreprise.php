@@ -33,3 +33,5 @@ echo $donneesJSON;
 
 mysqli_close($db);
 ?>
+<!-- statistiques -->
+<?php include"record_stat.php" ?>
