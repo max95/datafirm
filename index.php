@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="description" content="DATAFIRM permet a ces utilisateurs de trouver une entreprise suivant son secteur d'activité. Il Géolicalise les visiteurs afin de leur permettre de voir les entreprises le plus proche d'eux.">
+    <meta name="description" content="DATAFIRM permet a ces utilisateurs de trouver une entreprise suivant son secteur d'activité.">
     <meta name="keyboard" content="">
 
     <title>DATAFIRM</title>
@@ -18,7 +18,6 @@
 
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
     <link href="magnific-popup/magnific-popup.css" rel="stylesheet">
     <link href="css/creative.min.css" rel="stylesheet">
@@ -27,7 +26,13 @@
       img{
          width:auto;
           height: auto;
-   
+
+      }
+      .header-bg {
+        width:100%;
+        height:550px;
+        background-image: url("images/boussole.jpg");
+        background-size:cover;
       }
 
       .img-rounded{
@@ -39,75 +44,105 @@
             height: auto;
             display: inline;
       }
+      .progress-bar-vertical {
+        width: 100%;
+        min-height: 200px;
+        display: flex;
+        align-items: flex-end;
+        margin-right: 20px;
+        margin-top: 20px;
+        float: bottom;
+      }
 
+      .progress-bar-vertical .progress-bar {
+        width: 100%;
+        height: 0;
+        -webkit-transition: height 0.6s ease;
+        -o-transition: height 0.6s ease;
+        transition: height 0.6s ease;
+      }
     </style>
 
 </head>
 
 <body id="page-top">
+  <div class="header-bg">
+    <nav class="navbar navbar-default" style="border-color:transparent;">
+     <div class="container-fluid">
+       <ul class="nav navbar-nav navbar-right">
+          <?php include"menu.php" ?>
+       </ul>
+     </div>
+    </nav>
+     <div class="container">
+     </div>
+  </div>
+  <div class="container">
+    <div class="col-md-offset-1 col-md-2 col-md-offset-9" style="margin-top:-120px">
+      <a onclick="recherche.php"class="btn btn-primary" style="background-color: #fFad00;">Accéder à la carte</a>
+    </div>
+  </div>
+  <div class="jumbotron">
+      <div class="container">
+        <div class="col-md-2">
+            <div class="progress progress-bar-vertical">
+              <div class="progress-bar" role="progressbar" aria-valuenow="4086150" aria-valuemin="0" aria-valuemax="10640379" style="height: 61%;">
+                <span class="sr-only">30% Complete</span>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+          <h2>Nombre de sociétés inscrites dans SIRENE : 10.640.379</h2>
+          <h2>Nombre de sociétés référencées dans DATAFirm : 4.086.150</h2><br><br><br>
+          <a onclick="#"class="btn btn-primary" style="background-color: #082268 ">En savoir plus</a>
+        </div>
+      </div>
+    </div>
+    <div class="jumbotron" style="background-color: white">
+      <div class="container">
+            <div class="row">
+              <div class="col-md-4 m-b-lg">
+                        <div class="panel panel-default panel-profile m-b-0">
+                          <div class="panel-heading" style="background-image: url(images/voilier.jpeg);"></div>
+                          <div class="panel-body text-center">
+                            <img class="panel-profile-img" src="images/jerome.jpeg">
+                            <h5 class="panel-title">Jerome Bouchet</h5>
+                            <p class="m-b">Apprenti Data Analyst.</p>
+                            <a href="https://www.linkedin.com/in/jerome-bouchet-375b28a2/" role="button " onclick="window.open(this.href); return false;"><i class="fa fa-linkedin-square fa-3x" style="color:#585858"></i></a>
+                          </div>
+                        </div>
+              </div>
+              <!--</div> col-md-4 m-b-lg -->
+              <div class="col-md-4 m-b-lg">
+                        <div class="panel panel-default panel-profile m-b-0">
+                          <div class="panel-heading" style="background-image: url(images/wallpaper_hugo1.jpeg);"></div>
+                          <div class="panel-body text-center">
+                            <img class="panel-profile-img" src="images/hugo.jpeg">
+                            <h5 class="panel-title">Hugo Fichot</h5>
+                            <p class="m-b">Apprenti Décisionnel.</p>
+                            <a href="https://www.linkedin.com/in/hugo-fichot-964322105/" role="button" onclick="window.open(this.href); return false;"><i class="fa fa-linkedin-square fa-3x" style="color:#585858"></i></a>
+                            </a>
+                          </div>
+                        </div>
+              </div>
+              <!--</div> col-md-4 m-b-lg -->
+              <div class="col-md-4 m-b-lg">
+                        <div class="panel panel-default panel-profile m-b-0">
+                          <div class="panel-heading" style="background-image: url(images/wallpaper_chris.jpeg);"></div>
+                          <div class="panel-body text-center">
+                            <img class="panel-profile-img" src="images/chris.jpeg">
+                            <h5 class="panel-title">Christopher Clemoux</h5>
+                            <p class="m-b">Apprenti Développeur.</p>
+                            <a href="https://www.linkedin.com/in/christopher-clemoux-830814145/" role="button" onclick="window.open(this.href); return false;"><i class="fa fa-linkedin-square fa-3x" style="color:#585858"></i></a>
+                          </div>
+                        </div>
+              </div>
+              <!--</div> col-md-4 m-b-lg -->
 
-  <?php include"menu.php" ?>
-
-  <div class="container marketing">
-
-    <!-- START THE FEATURETTES -->
-
-    <div class="jumbotron">
-            <h1>DATAFIRM</h1>
-            <p class="">En phase de TEST</p>
-            <p class="lead">Trouver facilement une entreprise en fonction de votre position et de son activité.</p>
-            <a class="btn btn-lg btn-success" href="recherche.php" role="button">Entrez</a>
+            </div>
+            <!--</div> row -->
 
     </div>
-    <!-- jumbotron -->
-
-        <div class="row">
-          <div class="col-md-4 m-b-lg">
-                    <div class="panel panel-default panel-profile m-b-0">
-                      <div class="panel-heading" style="background-image: url(images/voilier.jpeg);"></div>
-                      <div class="panel-body text-center">
-                        <img class="panel-profile-img" src="images/jerome.jpeg">
-                        <h5 class="panel-title">Jerome Bouchet</h5>
-                        <p class="m-b">Apprenti Data Analyst.</p>
-                        <a href="https://www.linkedin.com/in/jerome-bouchet-375b28a2/" role="button " onclick="window.open(this.href); return false;"><img src="images\linkedin.jpeg" class="img-rounded" title="lien vers linkedin"></a> 
-                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.jpeg" class="img-rounded" title="lien vers viadeo"></a> 
-                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpeg" class="img-rounded" title="lien vers facebook"></a>
-                      </div>
-                    </div>
-          </div>
-          <!--</div> col-md-4 m-b-lg -->
-          <div class="col-md-4 m-b-lg">
-                    <div class="panel panel-default panel-profile m-b-0">
-                      <div class="panel-heading" style="background-image: url(images/wallpaper_hugo1.jpeg);"></div>
-                      <div class="panel-body text-center">
-                        <img class="panel-profile-img" src="images/hugo.jpeg">
-                        <h5 class="panel-title">Hugo Fichot</h5>
-                        <p class="m-b">Apprenti Décisionnel.</p>
-                        <a href="https://www.linkedin.com/in/hugo-fichot-964322105/" role="button" onclick="window.open(this.href); return false;"><img src="images\linkedin.jpeg" class="img-rounded" title="lien vers linkedin"></a> 
-                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.jpeg" class="img-rounded" title="lien vers viadeo"></a> 
-                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpeg" class="img-rounded" title="lien vers facebook"></a>
-                        </a>
-                      </div>
-                    </div>
-          </div>
-          <!--</div> col-md-4 m-b-lg -->
-          <div class="col-md-4 m-b-lg">
-                    <div class="panel panel-default panel-profile m-b-0">
-                      <div class="panel-heading" style="background-image: url(images/wallpaper_chris.jpeg);"></div>
-                      <div class="panel-body text-center">
-                        <img class="panel-profile-img" src="images/chris.jpeg">
-                        <h5 class="panel-title">Christopher Clemoux</h5>
-                        <p class="m-b">Apprenti Développeur.</p>
-                        <a href="https://www.linkedin.com/in/christopher-clemoux-830814145/" role="button" onclick="window.open(this.href); return false;"><img src="images\linkedin.jpeg" class="img-rounded" title="lien vers linkedin"></a> 
-                        <a href="https://fr.viadeo.com/fr/" role="button" onclick="window.open(this.href); return false;"><img src="images\viadeo.jpeg" class="img-rounded" title="lien vers viadeo"></a> 
-                        <a href="https://fr-fr.facebook.com/" role="button" onclick="window.open(this.href); return false;"><img src="images\fb.jpeg" class="img-rounded" title="lien vers facebook"></a>
-                      </div>
-                    </div>
-          </div>
-          <!--</div> col-md-4 m-b-lg -->
-
-        </div>
-        <!--</div> row -->
 </div class="container marketing">
 <!-- container marketing -->
 

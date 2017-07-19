@@ -39,8 +39,17 @@
 
     <div id="page-top">
 
-<?php include"menu.php" ?>
-
+      <nav class="navbar navbar-inverse" style="border-color:transparent;">
+       <div class="container-fluid">
+         <ul class="nav navbar-nav navbar-right">
+           <li><a href="index.php"><span class="glyphicon glyphicon-home"></span> Accueil</a></li>
+           <li><a href="recherche.php"><span class="glyphicon glyphicon-search"></span> Carte</a></li>
+           <li><a href="a-propos.html"><span class="glyphicon glyphicon-info-sign"></span> Qu'est-ce que DATAFirm</a></li>
+           <li><a href="statistic.php"><span class="glyphicon glyphicon-signal"></span> Statistiques</a></li>
+           <li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Nous contacter</a></li>
+         </ul>
+       </div>
+      </nav>
         <div id="">
             <div class="row">
                 <div class="col-lg-12">
