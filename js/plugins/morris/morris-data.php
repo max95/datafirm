@@ -17,7 +17,7 @@ $(function() {
           FROM statistiques F,
               (SELECT id,
               (select count(id)
-                FROM statistiques R WHERE page like '%rating%' AND R.id=C.id) REQUETE
+                FROM statistiques R WHERE page like '%proximite%' AND R.id=C.id) REQUETE
                 FROM statistiques C) N
           WHERE F.id=N.id
           GROUP BY DATE_FORMAT(date, '%Y-%m-%d') ORDER BY date";
