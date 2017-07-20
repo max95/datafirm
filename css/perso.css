@@ -13,6 +13,9 @@ body {
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
+.navbar{
+  background-color: #428bca;
+}
 /* Special class on .container surrounding .navbar, used for positioning it into place. */
 .navbar-wrapper {
   position: absolute;

@@ -8,24 +8,30 @@
     <meta name="author" content="">
 
     <title>DATAGOUV.php</title>
- <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- DataTables CSS -->
-    <link href="css/plugins/dataTables.bootstrap.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="slider/dist/css/bootstrap-slider.css" rel="stylesheet">
+
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
+    <link href="magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="css/creative.min.css" rel="stylesheet">
+    <link href="css/perso.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
-<?php include"menu.php" ?>
+	<nav class="navbar navbar-default" style="border-color:transparent;">
+	 <div class="container-fluid">
+		 <ul class="nav navbar-nav navbar-right">
+			 <li><a href="index.php"><span class="glyphicon glyphicon-home"></span> Accueil</a></li>
+			 <li><a href="recherche.php"><span class="glyphicon glyphicon-search"></span> Carte</a></li>
+			 <li><a href="a-propos.html"><span class="glyphicon glyphicon-info-sign"></span> Qu'est-ce que DATAFirm</a></li>
+			 <li><a href="statistic.php"><span class="glyphicon glyphicon-signal"></span> Statistiques</a></li>
+			 <li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Nous contacter</a></li>
+		 </ul>
+	 </div>
+	</nav>
 
 <div class="jumbotron">
   <h1>Contact</h1>

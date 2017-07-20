@@ -12,17 +12,15 @@
 
     <title>DATAFIRM-recherche d'une entreprise</title>
 
-    <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- DataTables CSS -->
-    <link href="css/plugins/dataTables.bootstrap.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
+    <link href="slider/dist/css/bootstrap-slider.css" rel="stylesheet">
+
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <link href="magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="css/creative.min.css" rel="stylesheet">
+    <link href="css/perso.css" rel="stylesheet">
     <style>
     /* Always set the map height explicitly to define the size of the div
      * element that contains the map. */
@@ -65,12 +63,26 @@
     </style>
 </head>
 <body id="page-top">
-  <?php include"menu.php" ?>
+  <div class="header-bg">
+    <nav class="navbar navbar-default" style="border-color:transparent;">
+     <div class="container-fluid">
+       <ul class="nav navbar-nav navbar-right">
+         <li><a href="index.php"><span class="glyphicon glyphicon-home"></span> Accueil</a></li>
+         <li><a href="recherche.php"><span class="glyphicon glyphicon-search"></span> Carte</a></li>
+         <li><a href="a-propos.html"><span class="glyphicon glyphicon-info-sign"></span> Qu'est-ce que DATAFirm</a></li>
+         <li><a href="statistic.php"><span class="glyphicon glyphicon-signal"></span> Statistiques</a></li>
+         <li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Nous contacter</a></li>
+       </ul>
+     </div>
+    </nav>
+     <div class="container">
+     </div>
+  </div>
     <div class="header-content">
     <div class="col-md-8">
       <!-- Division d’affichage du résultat -->
       <div id="divisionResultat"></div>
-      <input id="pac-input" class="controls" type="text"
+          <input id="pac-input" class="controls" type="text"
           placeholder="Enter a location">
       <input id="idmalatitude" name="malatitude" type="hidden">
       <input id="idmalongitude" name="malongitude" type="hidden">
@@ -136,6 +148,8 @@
     <!-- Footer -->
     <?php include"footer.php" ?>
     <!-- Script donné par Google à linker avec sa page -->
+    <!-- statistiques -->
+    <?php include"record_stat.php" ?>
     <script>
 
       // In the following example, markers appear when the user clicks on the map.
@@ -381,7 +395,6 @@
     </script>
 
 
-    <!-- statistiques -->
-    <?php include"record_stat.php" ?>
+
 </body>
 </html>
